@@ -1,17 +1,20 @@
 package org.sz.rts;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Greeting {
 
     private final long id;
     private final String content;
-    private final Date date;
+    private final LocalDateTime dateTime;
+    private final String ip;
 
-    public Greeting(long id, String content) {
+    public Greeting(long id, String content, String ip) {
         this.id = id;
         this.content = content;
-        this.date = new Date();
+        this.ip = ip;
+        this.dateTime = LocalDateTime.now();
     }
 
     public long getId() {
@@ -22,7 +25,11 @@ public class Greeting {
         return content;
     }
 
-    public Date getDate() {
-        return date;
+    public String getIp() {
+        return ip;
+    }
+
+    public String getDateTime() {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(dateTime);
     }
 }
