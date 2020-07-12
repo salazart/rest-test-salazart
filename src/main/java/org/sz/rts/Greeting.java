@@ -1,35 +1,58 @@
 package org.sz.rts;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Greeting {
 
-    private final long id;
-    private final String content;
-    private final LocalDateTime dateTime;
-    private final String ip;
+    private Long id;
+    private String content;
+    private LocalDateTime dateTime;
+    private String ip;
 
-    public Greeting(long id, String content, String ip) {
-        this.id = id;
+    public Greeting() {}
+
+    public Greeting(String content, LocalDateTime dateTime, String ip) {
         this.content = content;
+        this.dateTime = dateTime;
         this.ip = ip;
-        this.dateTime = LocalDateTime.now();
     }
 
-    public long getId() {
+    public Greeting(long id, String content, LocalDateTime dateTime, String ip) {
+        this.id = id;
+        this.content = content;
+        this.dateTime = dateTime;
+        this.ip = ip;
+    }
+
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContent() {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public String getIp() {
         return ip;
     }
 
-    public String getDateTime() {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(dateTime);
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }
