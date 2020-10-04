@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Run') {
             steps {
-                sh 'gradle bootRun'
+                sh 'java -jar build/libs/rest-test-salazart-0.0.1-SNAPSHOT.jar'
             }
         }
     }
