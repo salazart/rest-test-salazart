@@ -7,12 +7,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './gradlew build'
+                sh 'gradle build'
             }
         }
         stage('Run') {
             steps {
-                sh './gradlew bootRun'
+                sh 'gradle bootRun'
             }
         }
     }
