@@ -13,8 +13,6 @@ pipeline {
         stage('Docker') {
              steps {
                  sh 'docker -v'
-             }
-             steps {
                  sh 'docker run -d --rm -p 8081:8081 --name my_container my_openjdk'
              }
         }
