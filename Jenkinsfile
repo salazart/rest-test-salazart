@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Run') {
             steps {
-                sh 'gradle bootRun'
+                sh 'docker version'
             }
         }
     }
