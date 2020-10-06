@@ -10,12 +10,10 @@ pipeline {
                 sh 'gradle build'
             }
         }
-    }
-    stages {
         stage('Docker') {
-            steps {
-                sh 'docker -v'
-            }
+             steps {
+                  sh 'docker -v'
+             }
         }
     }
 }
