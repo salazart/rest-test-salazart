@@ -10,13 +10,9 @@ pipeline {
                 sh 'gradle build'
             }
         }
-        stage('Docker') {
-             agent {
-                  docker { image 'arm32v7/openjdk' }
-             }
-             steps {
-                  sh 'java -version'
-             }
-        }
     }
+    def customImage = docker.build("my-image:${env.BUILD_ID}")
+        customImage.inside {
+            sh 'java -version'
+        }
 }
