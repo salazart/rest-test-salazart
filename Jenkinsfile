@@ -8,9 +8,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'gradle build'
-                sh 'cd build/libs/'
                 sh 'pwd'
-                sh 'cp rest-test-salazart2-0.0.1-SNAPSHOT.jar /tmp/rest-test-salazart2-0.0.1-SNAPSHOT.jar'
+                sh 'cp build/libs/rest-test-salazart2-0.0.1-SNAPSHOT.jar /tmp/rest-test-salazart2-0.0.1-SNAPSHOT.jar'
             }
         }
         stage('Docker') {
