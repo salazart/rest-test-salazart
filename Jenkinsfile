@@ -1,19 +1,7 @@
-pipeline {
-    agent { dockerfile true }
-
-    triggers {
-        pollSCM '* * * * *'
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'gradle build'
-            }
-        }
-        stage('Docker') {
-             steps {
-                  sh 'docker -v'
-             }
-        }
+node {
+    checkout scm
+    docker.image('arm32v7/openjdk').withRun('-p 8081:8081') { c ->
+        sh 'do sleep 5000'
+        sh 'java -version'
     }
 }
