@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { dockerfile true }
 
     triggers {
         pollSCM '* * * * *'
@@ -11,8 +11,11 @@ pipeline {
             }
         }
     }
-    def customImage = docker.build("my-image:${env.BUILD_ID}")
-        customImage.inside {
-            sh 'java -version'
+    stages {
+        stage('Docker') {
+            steps {
+                sh 'docker -v'
+            }
         }
+    }
 }
