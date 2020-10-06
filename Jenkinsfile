@@ -10,12 +10,12 @@ pipeline {
                 sh 'gradle build'
             }
         }
-        stage('Front-end') {
+        stage('Docker') {
              agent {
-                  docker { image 'node:14-alpine' }
+                  docker { image 'arm32v7/openjdk' }
              }
              steps {
-                  sh 'node --version'
+                  sh 'java -version'
              }
         }
     }
