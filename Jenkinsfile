@@ -10,10 +10,13 @@ pipeline {
                 sh 'gradle build'
             }
         }
-        stage('Run') {
-            steps {
-                sh 'docker version'
-            }
+        stage('Front-end') {
+             agent {
+                  docker { image 'node:14-alpine' }
+             }
+             steps {
+                  sh 'node --version'
+             }
         }
     }
 }
