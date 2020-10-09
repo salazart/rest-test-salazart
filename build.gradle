@@ -4,10 +4,6 @@ plugins {
 	id 'java'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
-
 repositories {
 	mavenCentral()
 }
@@ -23,4 +19,16 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+archivesBaseName = 'rest-test-salazart'
+group = 'com.sz.rts'
+version = '0.0.1-SNAPSHOT'
+
+task copyJarToPath {
+	doLast {
+		copy {
+			from 'build/libs/rest-test-salazart-0.0.1-SNAPSHOT.jar'
+			into "/tmp/"
+		}
+	}
 }
