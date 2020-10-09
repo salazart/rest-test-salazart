@@ -16,6 +16,8 @@ pipeline {
              steps {
                  sh 'docker -v'
                  sh "echo $PATH"
+                 sh "echo $JENKINS_HOME"
+                 sh "echo $DOCKER_HOME"
                  sh 'docker build -t my_openjdk2 .'
                  sh 'docker run -d --rm -p 8081:8081 --name my_container2 my_openjdk2'
              }
