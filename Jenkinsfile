@@ -15,7 +15,7 @@ pipeline {
         stage('Docker') {
              steps {
                  sh 'docker -v'
-                 sh "docker logs ${c.id}"
+                 sh "echo $PATH"
                  sh 'docker build -t my_openjdk2 .'
                  sh 'docker run -d --rm -p 8081:8081 --name my_container2 my_openjdk2'
              }
