@@ -1,4 +1,5 @@
 FROM arm32v7/openjdk
 MAINTAINER salazart
-COPY ~/rest-test-salazart-0.0.1-SNAPSHOT.jar /home/rest-test-salazart-0.0.1-SNAPSHOT.jar
-CMD ["java","-jar","/home/rest-test-salazart-0.0.1-SNAPSHOT.jar"]
+ARG JAR_FILE
+COPY ${JAR_FILE} app.jar
+CMD ["java","-jar","/app.jar"]
