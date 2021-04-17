@@ -41,7 +41,7 @@ def imageName = "rest-test-salazart-image:$version"
 
 task createDockerfile(type: Dockerfile) {
 	from 'arm32v7/openjdk'
-	label(['maintainer': 'salazart"'])
+	label(['maintainer': 'salazart'])
 }
 
 task buildImage(type: DockerBuildImage) {
