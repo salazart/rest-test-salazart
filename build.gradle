@@ -39,12 +39,13 @@ task copyJarToPath {
 
 def imageName = "rest-test-salazart-image:$version"
 
-task createDockerfile(type: Dockerfile) {
-	from 'arm32v7/openjdk'
-	label(['maintainer': 'salazart'])
+task createDBContainer(type: DockerCreateContainer) {
+	targetImageId 'arm32v7/openjdk'
+	containerName = imageName
+	hostConfig.autoRemove = true
 }
 
 task buildImage(type: DockerBuildImage) {
-	dependsOn createDockerfile
+	dependsOn createDBContainer
 	images.add(imageName)
 }
