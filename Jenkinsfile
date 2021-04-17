@@ -15,5 +15,10 @@ pipeline {
                 sh 'gradle assemble docker dockerRun'
             }
         }
+        stage('Start database container') {
+            steps {
+                sh 'gradle startContainer'
+            }
+        }
     }
 }

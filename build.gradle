@@ -35,7 +35,22 @@ task copyJarToPath {
 	}
 }
 
-String imageName = "rest-test-salazart-image:$version"
+def dockerBuildDir = 'build/libs/'
+def imageName = "rest-test-salazart-image:$version"
+
+task createDockerfile {
+	destFile = project.file("$dockerBuildDir/Dockerfile")
+	from 'arm32v7/openjdk'
+	copyFile jar.archiveName, '/app/test_service.jar'
+	entryPoint 'java'
+	defaultCommand '-jar', '/app.jar'
+	runCommand 'apk --update --no-cache add curl'
+	instruction 'HEALTHCHECK CMD curl -f http://localhost:8080/hello || exit 1'
+}
+
+task startContainer {
+	dependsOn createContainer
+}
 
 docker {
 	name imageName
@@ -47,5 +62,5 @@ dockerRun {
 	name project.name
 	image imageName
 	ports '8081:8081'
-	clean false
+	clean true
 }
