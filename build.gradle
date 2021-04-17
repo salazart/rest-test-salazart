@@ -2,8 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
-	id 'com.palantir.docker' version '0.25.0'
-	id 'com.palantir.docker-run' version '0.25.0'
+	id 'com.bmuschko.docker-remote-api' version '6.7.0'
 }
 
 repositories {
@@ -35,21 +34,16 @@ task copyJarToPath {
 	}
 }
 
-def dockerBuildDir = 'build/libs/'
 def imageName = "rest-test-salazart-image:$version"
 
 task createDockerfile {
-	destFile = project.file("$dockerBuildDir/Dockerfile")
 	from 'arm32v7/openjdk'
-	copyFile jar.archiveName, '/app/test_service.jar'
-	entryPoint 'java'
-	defaultCommand '-jar', '/app.jar'
-	runCommand 'apk --update --no-cache add curl'
-	instruction 'HEALTHCHECK CMD curl -f http://localhost:8080/hello || exit 1'
+	label(['maintainer': 'salazart"'])
 }
 
-task startContainer {
-	dependsOn createContainer
+task buildImage {
+	dependsOn createDockerfile
+	images.add(imageName)
 }
 
 docker {
