@@ -5,6 +5,9 @@ plugins {
 	id 'com.bmuschko.docker-remote-api' version '6.7.0'
 }
 
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
 repositories {
 	mavenCentral()
 }
@@ -36,25 +39,12 @@ task copyJarToPath {
 
 def imageName = "rest-test-salazart-image:$version"
 
-task createDockerfile {
+task createDockerfile(type: Dockerfile) {
 	from 'arm32v7/openjdk'
 	label(['maintainer': 'salazart"'])
 }
 
-task buildImage {
+task buildImage(type: DockerBuildImage) {
 	dependsOn createDockerfile
 	images.add(imageName)
-}
-
-docker {
-	name imageName
-	files "build/libs/${bootJar.archiveFileName.get()}"
-	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
-}
-
-dockerRun {
-	name project.name
-	image imageName
-	ports '8081:8081'
-	clean true
 }
